@@ -1,0 +1,15 @@
+{
+  "name": "form-carousel",
+  "version": "1.0.0",
+  "description": "Form that shows options one at a time.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sedenardi/form-carousel.git"
+  },
+  "author": "Sanders DeNardi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sedenardi/form-carousel/issues"
+  },
+  "homepage": "https://github.com/sedenardi/form-carousel"
+}
