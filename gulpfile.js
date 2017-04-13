@@ -53,7 +53,7 @@ gulp.task('watchCss', () => {
   return gulp.watch('src/scss/**/*', gulp.series('buildCss'));
 });
 
-gulp.task('watch', gulp.series(
+gulp.task('watch', gulp.parallel(
   'build',
   'watchJs',
   'watchCss'

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form Carousel Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		<link rel="stylesheet" type="text/css" href="lib/css/form-carousel.css" />
+    <script type="text/javascript" src="lib/js/form-carousel.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>Form Carousel Demo</h1>
+      <form id="demoForm" class="form-carousel">
+        <div class="form-carousel-inner">
+          <ol>
+            <li>
+              <span><label for="q1">What's your email?</label></span>
+              <input id="q1" name="q1" type="email"/>
+            </li>
+            <li>
+              <span><label for="q2">Where do you live?</label></span>
+              <input id="q2" name="q2" type="text"/>
+            </li>
+            <li>
+              <span><label for="q3">What time do you go to work?</label></span>
+              <input id="q3" name="q3" type="text"/>
+            </li>
+            <li>
+              <span><label for="q4">How do you like your veggies?</label></span>
+              <input id="q4" name="q4" type="text"/>
+            </li>
+            <li>
+              <span><label for="q5">What book inspires you?</label></span>
+              <input id="q5" name="q5" type="text"/>
+            </li>
+            <li>
+              <span><label for="q6">What's your profession?</label></span>
+              <input id="q6" name="q6" type="text"/>
+            </li>
+          </ol>
+          <button class="submit" type="submit">Send answers</button>
+          <div class="controls">
+            <button class="next"></button>
+            <div class="progress"></div>
+            <span class="number">
+              <span class="number-current"></span>
+              <span class="number-total"></span>
+            </span>
+            <span class="error-message"></span>
+          </div>
+        </div>
+        <span class="final-message"></span>
+      </form>
+    </div>
+    <script type="text/javascript">
+new FormCarousel('#demoForm', {
+  onSubmit: function(form) {
+    console.log('submit');
+  }
+})
+    </script>
+  </body>
+</html>

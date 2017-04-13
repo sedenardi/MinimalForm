@@ -1,0 +1,215 @@
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'icomoon';
+  src: url("../../fonts/icomoon/icomoon.eot?-9heso");
+  src: url("../../fonts/icomoon/icomoon.eot?#iefix-9heso") format("embedded-opentype"), url("../../fonts/icomoon/icomoon.woff?-9heso") format("woff"), url("../../fonts/icomoon/icomoon.ttf?-9heso") format("truetype"), url("../../fonts/icomoon/icomoon.svg?-9heso#icomoon") format("svg"); }
+
+.form-carousel {
+  position: relative;
+  margin: 0 auto;
+  padding: 2em 0;
+  max-width: 860px;
+  width: 100%;
+  text-align: left;
+  font-size: 2.5em; }
+  .form-carousel .submit {
+    display: none; }
+  .form-carousel ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    -webkit-transition: height 0.4s;
+    transition: height 0.4s; }
+    .form-carousel ol:before {
+      content: '';
+      background-color: rgba(0, 0, 0, 0.1);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2.35em; }
+    .form-carousel ol li {
+      z-index: 100;
+      position: relative;
+      visibility: hidden;
+      height: 0;
+      -webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
+      transition: visibility 0s 0.4s, height 0s 0.4s; }
+      .form-carousel ol li.current {
+        visibility: visible;
+        height: auto;
+        -webkit-transition: none;
+        transition: none; }
+      .form-carousel ol li span {
+        display: block;
+        overflow: hidden; }
+        .form-carousel ol li span label {
+          display: block;
+          -webkit-transition: -webkit-transform 0.4s;
+          transition: transform 0.4s;
+          -webkit-transform: translateY(-100%);
+          transform: translateY(-100%); }
+      .form-carousel ol li.current span label {
+        -webkit-transition: none;
+        transition: none;
+        -webkit-transform: translateY(0);
+        transform: translateY(0); }
+      .form-carousel ol li input {
+        display: block;
+        margin: 0.3em 0 0 0;
+        padding: 0.2em 1em 0.5em 0.7em;
+        width: calc(100% - 2em);
+        border: none;
+        background: transparent;
+        color: rgba(0, 0, 0, 0.8);
+        font-size: 1em;
+        line-height: 1;
+        opacity: 0;
+        -webkit-transition: opacity 0.3s;
+        transition: opacity 0.3s;
+        height: 2.1em; }
+        .form-carousel ol li input:focus {
+          outline: none; }
+      .form-carousel ol li.current input {
+        opacity: 1; }
+  .form-carousel .next {
+    position: absolute;
+    right: 0;
+    bottom: 2.15em;
+    /* padding-bottom of form plus progress bar height */
+    display: block;
+    padding: 0;
+    width: 2em;
+    height: 2em;
+    border: none;
+    background: none;
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transform: translateX(-20%);
+    transform: translateX(-20%);
+    pointer-events: none;
+    -webkit-tap-highlight-color: transparent; }
+    .form-carousel .next:hover {
+      color: rgba(0, 0, 0, 0.5); }
+    .form-carousel .next::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      content: "\e600";
+      text-transform: none;
+      font-weight: normal;
+      font-style: normal;
+      font-variant: normal;
+      font-family: 'icomoon';
+      line-height: 2;
+      speak: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale; }
+    .form-carousel .next.show {
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      pointer-events: auto; }
+  .form-carousel .progress {
+    width: 0%;
+    height: 0.15em;
+    background: rgba(0, 0, 0, 0.3);
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out; }
+    .form-carousel .progress::before {
+      position: absolute;
+      top: auto;
+      width: 100%;
+      height: inherit;
+      background: rgba(0, 0, 0, 0.05);
+      content: ''; }
+  .form-carousel .number {
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    margin: 0.4em 0;
+    width: 3em;
+    font-weight: 700;
+    font-size: 0.4em; }
+    .form-carousel .number:after {
+      position: absolute;
+      left: 50%;
+      content: '/';
+      opacity: 0.4;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%); }
+    .form-carousel .number span {
+      float: right;
+      width: 40%;
+      text-align: center; }
+    .form-carousel .number .number-current {
+      float: left; }
+    .form-carousel .number .number-next {
+      position: absolute;
+      left: 0; }
+  .form-carousel .error-message, .form-carousel .final-message {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    transition: opacity 0.4s; }
+  .form-carousel .error-message {
+    padding: 0.4em 3.5em 0 0;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.7);
+    font-style: italic;
+    font-size: 0.4em; }
+  .form-carousel .final-message {
+    top: 50%;
+    left: 0;
+    padding: 0.5em;
+    width: 100%;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%); }
+  .form-carousel .error-message.show,
+  .form-carousel .final-message.show {
+    visibility: visible;
+    opacity: 1; }
+  .form-carousel .final-message.show {
+    -webkit-transition-delay: 0.5s;
+    transition-delay: 0.5s; }
+  .form-carousel .form-carousel-inner.hide {
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+    transition: opacity 0.3s, visibility 0s 0.3s; }
+  .form-carousel.show-next ol li.current span label {
+    -webkit-animation: moveUpFromDown 0.4s both;
+    animation: moveUpFromDown 0.4s both; }
+  .form-carousel.show-next .number-current {
+    -webkit-transition: -webkit-transform 0.4s;
+    transition: transform 0.4s;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%); }
+  .form-carousel.show-next .number-next {
+    -webkit-animation: moveUpFromDown 0.4s both;
+    animation: moveUpFromDown 0.4s both; }
+
+@-webkit-keyframes moveUpFromDown {
+  from {
+    -webkit-transform: translateY(100%); }
+  to {
+    -webkit-transform: translateY(0); } }
+
+@keyframes moveUpFromDown {
+  from {
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%); }
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0); } }
