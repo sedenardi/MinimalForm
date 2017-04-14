@@ -131,7 +131,7 @@
     clearError() {
       removeClass(this.error, 'show');
     }
-    progress() {
+    updateProgress() {
       const currentProgress = this.current * (100 / this.questionsCount);
   		this.progress.style.width = currentProgress + '%';
   		// update the progressbar's aria-valuenow attribute
@@ -182,7 +182,7 @@
   		++this.current;
 
   		// update progress bar
-  		this.progress();
+  		this.updateProgress();
       let nextQuestion;
   		if (!this.isFilled) {
   			// change the current question number/status
