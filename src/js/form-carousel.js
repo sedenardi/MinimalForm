@@ -229,6 +229,8 @@
         nextQuestion = this.questions[this.current];
         removeClass(currentQuestion, 'current');
         addClass(nextQuestion, 'current');
+      } else {
+        input.blur();
       }
 
       // after animation ends, remove class "show-next" from form element and change current question placeholder
