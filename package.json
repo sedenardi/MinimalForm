@@ -1,8 +1,8 @@
 {
   "name": "form-carousel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Form that shows options one at a time.",
-  "main": "lib/form-carousel.js",
+  "main": "lib/js/form-carousel.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sedenardi/form-carousel.git"
