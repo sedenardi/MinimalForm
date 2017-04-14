@@ -1,6 +1,6 @@
 {
   "name": "form-carousel",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Form that shows options one at a time.",
   "main": "lib/js/form-carousel.js",
   "repository": {
