@@ -176,9 +176,10 @@
       if (!this.validate()) {
         return false;
       }
+
+      const input = this.questions[this.current].querySelector('input, textarea, select');
       // checks HTML5 validation
       if (this.supportsHTML5Forms) {
-  			const input = this.questions[this.current].querySelector('input, textarea, select');
   			// clear any previous error messages
   			input.setCustomValidity('');
 
@@ -193,6 +194,11 @@
           return false;
         }
   		}
+
+      if (input.hasAttribute('escape') && this.options.onEscape) {
+        const cont = this.options.onEscape(input, this.formElement);
+        if (!cont) { return; }
+      }
 
   		// check if form is filled
   		if (this.current === this.questionsCount - 1) {
