@@ -1,12 +1,12 @@
 (function() {
 
   const randomID = function() {
-		var id = Math.random().toString(36).substr(2, 9);
-		if (document.getElementById(id)) {
-			return randomID();
-		}
-		return id;
-	};
+    const id = Math.random().toString(36).substr(2, 9);
+    if (document.getElementById(id)) {
+      return randomID();
+    }
+    return id;
+  };
 
   const hasClass = function(elem, className) {
     return new RegExp(` ${className} `).test(` ${elem.className} `);
@@ -65,8 +65,8 @@
   		// give the questions status an id
   		this.questionStatus.id = this.questionStatus.id || randomID();
   		// associate "x / y" with the input via aria-describedby
-  		for (var i = this.questions.length - 1; i >= 0; i--) {
-  			var formElement = this.questions[i].querySelector('input, textarea, select');
+  		for (let i = this.questions.length - 1; i >= 0; i--) {
+  			const formElement = this.questions[i].querySelector('input, textarea, select');
   			formElement.setAttribute('aria-describedby', this.questionStatus.id);
   		};
   		// current question placeholder
@@ -81,17 +81,17 @@
 
   		// checks for HTML5 Form Validation support
   		// a cleaner solution might be to add form validation to the custom Modernizr script
-  		this.supportsHTML5Forms = typeof document.createElement("input").checkValidity === 'function';
+  		this.supportsHTML5Forms = typeof document.createElement('input').checkValidity === 'function';
 
       /***** initEvents *****/
-      var self = this;
+      const self = this;
 			// first input
-			var firstElInput = this.questions[this.current].querySelector('input, textarea, select');
+      const firstElInput = this.questions[this.current].querySelector('input, textarea, select');
 			// focus
-			const onFocusStartFn = function() {
-				firstElInput.removeEventListener('focus', onFocusStartFn);
-				addClass(self.ctrlNext, 'show');
-			};
+      const onFocusStartFn = function() {
+        firstElInput.removeEventListener('focus', onFocusStartFn);
+        addClass(self.ctrlNext, 'show');
+      };
 
   		// show the next question control first time the input gets focused
   		firstElInput.addEventListener('focus', onFocusStartFn);
@@ -99,21 +99,21 @@
   		// show next question
   		this.ctrlNext.addEventListener('click', (ev) => {
   			ev.preventDefault();
-  			this._nextQuestion();
+  			this.nextQuestion();
   		});
 
   		// pressing enter will jump to next question
   		this.formElement.addEventListener('keydown', (ev) => {
-  			var keyCode = ev.keyCode || ev.which;
+  			const keyCode = ev.keyCode || ev.which;
   			// enter
-  			if( keyCode === 13 ) {
+  			if(keyCode === 13) {
   				ev.preventDefault();
-  				this._nextQuestion();
+  				this.nextQuestion();
   			}
   		});
     }
-    _showError( err ) {
-  		var message = '';
+    showError(err) {
+  		let message = '';
   		switch (err) {
   			case 'EMPTYSTR' :
   				message = 'Please fill the field before continuing';
@@ -128,16 +128,16 @@
   		this.error.innerHTML = message;
   		addClass(this.error, 'show');
   	}
-    _clearError() {
+    clearError() {
       removeClass(this.error, 'show');
     }
-    _progress() {
-      var currentProgress = this.current * (100 / this.questionsCount);
+    progress() {
+      const currentProgress = this.current * (100 / this.questionsCount);
   		this.progress.style.width = currentProgress + '%';
   		// update the progressbar's aria-valuenow attribute
   		this.progress.setAttribute('aria-valuenow', currentProgress);
     }
-    _updateQuestionNumber() {
+    updateQuestionNumber() {
   		// first, create next question number placeholder
   		this.nextQuestionNum = document.createElement('span');
   		this.nextQuestionNum.className = 'number-next';
@@ -145,13 +145,13 @@
   		// insert it in the DOM
   		this.questionStatus.appendChild(this.nextQuestionNum);
   	}
-    _submit() {
+    submit() {
   		this.options.onSubmit(this.formElement);
   	}
-    _nextQuestion() {
+    nextQuestion() {
       // checks HTML5 validation
   		if (this.supportsHTML5Forms) {
-  			var input = this.questions[this.current].querySelector('input, textarea, select');
+  			const input = this.questions[this.current].querySelector('input, textarea, select');
   			// clear any previous error messages
   			input.setCustomValidity('');
 
@@ -161,7 +161,7 @@
   				// comment or remove this line to use the browser default message
   				input.setCustomValidity('Whoops, that\'s not an email address!');
   				// display the HTML5 error message
-  				this._showError(input.validationMessage);
+  				this.showError(input.validationMessage);
   				// prevent the question from changing
   				return false;
   			}
@@ -173,53 +173,53 @@
   		}
 
   		// clear any previous error messages
-  		this._clearError();
+  		this.clearError();
 
   		// current question
-  		var currentQuestion = this.questions[this.current];
+  		const currentQuestion = this.questions[this.current];
 
   		// increment current question iterator
   		++this.current;
 
   		// update progress bar
-  		this._progress();
-
+  		this.progress();
+      let nextQuestion;
   		if (!this.isFilled) {
   			// change the current question number/status
-  			this._updateQuestionNumber();
+  			this.updateQuestionNumber();
 
   			// add class "show-next" to form element (start animations)
   			addClass(this.formElement, 'show-next');
 
   			// remove class "current" from current question and add it to the next one
   			// current question
-  			var nextQuestion = this.questions[this.current];
+  			nextQuestion = this.questions[this.current];
   			removeClass(currentQuestion, 'current');
   			addClass(nextQuestion, 'current');
   		}
 
   		// after animation ends, remove class "show-next" from form element and change current question placeholder
-  		var self = this;
-      const onEndTransitionFn = function (ev) {
-				// if (support.transitions) {
-				// 	this.removeEventListener(transEndEventName, onEndTransitionFn);
-				// }
-				if (self.isFilled) {
-					self._submit();
-				} else {
-					removeClass(self.formElement, 'show-next');
-					self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
-					self.questionStatus.removeChild(self.nextQuestionNum);
+  		const self = this;
+      const onEndTransitionFn = function () {
+        if (true/*support.transitions*/) {
+          this.removeEventListener('transitionend', onEndTransitionFn);
+        }
+        if (self.isFilled) {
+          self.submit();
+        } else {
+          removeClass(self.formElement, 'show-next');
+          self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
+          self.questionStatus.removeChild(self.nextQuestionNum);
 					// force the focus on the next input
-					nextQuestion.querySelector('input, textarea, select').focus();
-				}
-			};
+          nextQuestion.querySelector('input, textarea, select').focus();
+        }
+      };
 
-  		// if (support.transitions) {
-  		// 	this.progress.addEventListener(transEndEventName, onEndTransitionFn);
-  		// } else {
+  		if (true/*support.transitions*/) {
+  			this.progress.addEventListener('transitionend', onEndTransitionFn);
+  		} else {
   			onEndTransitionFn();
-  		// }
+  		}
     }
   }
 
