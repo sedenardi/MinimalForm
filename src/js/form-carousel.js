@@ -197,7 +197,10 @@
 
       if (input.hasAttribute('escape') && this.options.onEscape) {
         const cont = this.options.onEscape(input, this.formElement);
-        if (!cont) { return; }
+        if (!cont) {
+          input.blur();
+          return;
+        }
       }
 
       // check if form is filled
