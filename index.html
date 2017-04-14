@@ -49,15 +49,16 @@
             <span class="error-message"></span>
           </div>
         </div>
-        <span class="final-message"></span>
+        <span class="final-message">Submitted.</span>
       </form>
     </div>
     <script type="text/javascript">
-new FormCarousel('#demoForm', {
+var carousel = new FormCarousel('#demoForm', {
   onSubmit: function(form) {
     console.log('submit');
+    carousel.setSubmitted();
   }
-})
+});
     </script>
   </body>
 </html>

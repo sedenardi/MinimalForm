@@ -148,7 +148,20 @@
     submit() {
   		this.options.onSubmit(this.formElement);
   	}
+    validate() {
+  		// current question´s input
+  		const input = this.questions[this.current].querySelector('input, textarea, select').value;
+  		if (input === '') {
+  			this.showError('EMPTYSTR');
+  			return false;
+  		}
+
+  		return true;
+  	}
     nextQuestion() {
+      if (!this.validate()) {
+  			return false;
+  		}
       // checks HTML5 validation
   		if (this.supportsHTML5Forms) {
   			const input = this.questions[this.current].querySelector('input, textarea, select');
@@ -220,6 +233,10 @@
   		} else {
   			onEndTransitionFn();
   		}
+    }
+    setSubmitted() {
+      addClass(this.formElement.querySelector('.form-carousel-inner'), 'hide');
+      addClass(this.formElement.querySelector('.final-message'), 'show');
     }
   }
 
