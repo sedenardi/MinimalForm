@@ -6,72 +6,72 @@
 
 .form-carousel {
   position: relative;
-	margin: 0 auto;
-	padding: 2em 0;
-	max-width: 860px;
-	width: 100%;
-	text-align: left;
-	font-size: 2.5em;
+  margin: 0 auto;
+  padding: 2em 0;
+  max-width: 860px;
+  width: 100%;
+  text-align: left;
+  font-size: 2.5em;
 
   .submit {
-  	display: none;
+    display: none;
   }
 
   ol {
     margin: 0;
-  	padding: 0;
-  	list-style: none;
-  	position: relative;
-  	-webkit-transition: height 0.4s;
-  	transition: height 0.4s;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    -webkit-transition: height 0.4s;
+    transition: height 0.4s;
 
     &:before {
       content: '';
-    	// background-color: rgba(0,0,0,0.1);
-    	position: absolute;
-    	left: 0;
-    	bottom: 0;
-    	width: 100%;
-    	height: 2.35em;
+      // background-color: rgba(0,0,0,0.1);
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2.35em;
     }
 
     li {
       z-index: 100;
-    	position: relative;
-    	visibility: hidden;
-    	height: 0;
-    	-webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
-    	transition: visibility 0s 0.4s, height 0s 0.4s;
+      position: relative;
+      visibility: hidden;
+      height: 0;
+      -webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
+      transition: visibility 0s 0.4s, height 0s 0.4s;
 
       &.current {
         visibility: visible;
-      	height: auto;
-      	-webkit-transition: none;
-      	transition: none;
+        height: auto;
+        -webkit-transition: none;
+        transition: none;
       }
 
       span {
         display: block;
-      	overflow: hidden;
+        overflow: hidden;
 
         label {
           display: block;
-        	-webkit-transition: -webkit-transform 0.4s;
-        	transition: transform 0.4s;
-        	-webkit-transform: translateY(-100%);
-        	transform: translateY(-100%);
+          -webkit-transition: -webkit-transform 0.4s;
+          transition: transform 0.4s;
+          -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
         }
       }
 
       &.current span label {
         -webkit-transition: none;
-      	transition: none;
-      	-webkit-transform: translateY(0);
-      	transform: translateY(0);
+        transition: none;
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
       }
 
       input {
-      	display: block;
+        display: block;
         margin: 0.3em 0 0 0;
         padding: 0.2em 1em 0.5em 0.7em;
         width: calc(100% - 2em);
@@ -97,163 +97,163 @@
   }
 
   .next {
-  	position: absolute;
-  	right: 0.3em;
-  	bottom: 3.75em;
-	  font-size: 70%;
-		background-image: url('../img/arrow-right.svg');
-		background-size: 100% 100%;
-		background-color: transparent;
-  	display: block;
-  	padding: 0;
-  	width: 2em;
-  	height: 2em;
-  	border: none;
-  	color: rgba(0,0,0,0.4);
-  	text-align: center;
-  	opacity: 0;
-  	z-index: 100;
-  	cursor: pointer;
-  	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
-  	transition: transform 0.3s, opacity 0.3s;
-  	-webkit-transform: translateX(-20%);
-  	transform: translateX(-20%);
-  	pointer-events: none;
-  	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    position: absolute;
+    right: 0.3em;
+    bottom: 3.75em;
+    font-size: 70%;
+    background-image: url('../img/arrow-right.svg');
+    background-size: 100% 100%;
+    background-color: transparent;
+    display: block;
+    padding: 0;
+    width: 2em;
+    height: 2em;
+    border: none;
+    color: rgba(0,0,0,0.4);
+    text-align: center;
+    opacity: 0;
+    z-index: 100;
+    cursor: pointer;
+    -webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+    transition: transform 0.3s, opacity 0.3s;
+    -webkit-transform: translateX(-20%);
+    transform: translateX(-20%);
+    pointer-events: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 
     &:hover {
-    	color: rgba(0,0,0,0.5);
+      color: rgba(0,0,0,0.5);
     }
 
     &.show {
-    	opacity: 1;
-    	-webkit-transform: translateX(0);
-    	transform: translateX(0);
-    	pointer-events: auto;
+      opacity: 1;
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      pointer-events: auto;
     }
   }
 
   .progress {
-  	width: 0%;
-  	height: 0.15em;
-  	background: rgba(0,0,0,0.3);
-  	-webkit-transition: width 0.4s ease-in-out;
-  	transition: width 0.4s ease-in-out;
+    width: 0%;
+    height: 0.15em;
+    background: rgba(0,0,0,0.3);
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 
     &::before {
-    	position: absolute;
-    	top: auto;
-    	width: 100%;
-    	height: inherit;
-    	background: rgba(0,0,0,0.05);
-    	content: '';
+      position: absolute;
+      top: auto;
+      width: 100%;
+      height: inherit;
+      background: rgba(0,0,0,0.05);
+      content: '';
     }
   }
 
   .number {
-  	position: absolute;
-  	right: 0;
-  	overflow: hidden;
-  	margin: 0.4em 0;
-  	width: 3em;
-  	font-weight: 700;
-  	font-size: 0.4em;
+    position: absolute;
+    right: 0;
+    overflow: hidden;
+    margin: 0.4em 0;
+    width: 3em;
+    font-weight: 700;
+    font-size: 0.4em;
 
     &:after {
-    	position: absolute;
-    	left: 50%;
-    	content: '/';
-    	opacity: 0.4;
-    	-webkit-transform: translateX(-50%);
-    	transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      content: '/';
+      opacity: 0.4;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%);
     }
 
     span {
-    	float: right;
-    	width: 40%;
-    	text-align: center;
+      float: right;
+      width: 40%;
+      text-align: center;
     }
 
     .number-current {
-    	float: left;
+      float: left;
     }
 
     .number-next {
-    	position: absolute;
-    	left: 0;
+      position: absolute;
+      left: 0;
     }
   }
 
   .error-message, .final-message {
-  	position: absolute;
-  	visibility: hidden;
-  	opacity: 0;
-  	-webkit-transition: opacity 0.4s;
-  	transition: opacity 0.4s;
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    -webkit-transition: opacity 0.4s;
+    transition: opacity 0.4s;
   }
 
   .error-message {
-  	padding: 0.4em 3.5em 0 0;
-  	width: 100%;
-  	color: rgba(0,0,0,0.7);
-  	font-style: italic;
-  	font-size: 0.4em;
+    padding: 0.4em 3.5em 0 0;
+    width: 100%;
+    color: rgba(0,0,0,0.7);
+    font-style: italic;
+    font-size: 0.4em;
   }
 
   .final-message {
-  	top: 50%;
-  	left: 0;
-  	padding: 0.5em;
-  	width: 100%;
-  	text-align: center;
-  	-webkit-transform: translateY(-50%);
-  	transform: translateY(-50%);
+    top: 50%;
+    left: 0;
+    padding: 0.5em;
+    width: 100%;
+    text-align: center;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
   }
 
   .error-message.show,
   .final-message.show {
-  	visibility: visible;
-  	opacity: 1;
+    visibility: visible;
+    opacity: 1;
   }
 
   .final-message.show {
-  	-webkit-transition-delay: 0.5s;
-  	transition-delay: 0.5s;
+    -webkit-transition-delay: 0.5s;
+    transition-delay: 0.5s;
   }
 
   .form-carousel-inner.hide {
     visibility: hidden;
-  	opacity: 0;
-  	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
-  	transition: opacity 0.3s, visibility 0s 0.3s;
+    opacity: 0;
+    -webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+    transition: opacity 0.3s, visibility 0s 0.3s;
   }
 
   &.show-next {
     ol li.current span label {
       -webkit-animation: moveUpFromDown 0.4s both;
-    	animation: moveUpFromDown 0.4s both;
+      animation: moveUpFromDown 0.4s both;
     }
 
     .number-current {
-    	-webkit-transition: -webkit-transform 0.4s;
-    	transition: transform 0.4s;
-    	-webkit-transform: translateY(-100%);
-    	transform: translateY(-100%);
+      -webkit-transition: -webkit-transform 0.4s;
+      transition: transform 0.4s;
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
     }
 
     .number-next {
-    	-webkit-animation: moveUpFromDown 0.4s both;
-    	animation: moveUpFromDown 0.4s both;
+      -webkit-animation: moveUpFromDown 0.4s both;
+      animation: moveUpFromDown 0.4s both;
     }
   }
 }
 
 @-webkit-keyframes moveUpFromDown {
-	from { -webkit-transform: translateY(100%); }
-	to { -webkit-transform: translateY(0); }
+  from { -webkit-transform: translateY(100%); }
+  to { -webkit-transform: translateY(0); }
 }
 
 @keyframes moveUpFromDown {
-	from { -webkit-transform: translateY(100%); transform: translateY(100%); }
-	to { -webkit-transform: translateY(0); transform: translateY(0); }
+  from { -webkit-transform: translateY(100%); transform: translateY(100%); }
+  to { -webkit-transform: translateY(0); transform: translateY(0); }
 }

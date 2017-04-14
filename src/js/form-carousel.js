@@ -40,126 +40,126 @@
       // current question
       this.current = 0;
 
-  		// questions
-  		this.questions = [].slice.call(this.formElement.querySelectorAll('ol > li'));
-  		// total questions
-  		this.questionsCount = this.questions.length;
-  		// show first question
-  		addClass(this.questions[0], 'current');
+      // questions
+      this.questions = [].slice.call(this.formElement.querySelectorAll('ol > li'));
+      // total questions
+      this.questionsCount = this.questions.length;
+      // show first question
+      addClass(this.questions[0], 'current');
 
-  		// next question control
-  		this.ctrlNext = this.formElement.querySelector('button.next');
-  		this.ctrlNext.setAttribute('aria-label', 'Next');
+      // next question control
+      this.ctrlNext = this.formElement.querySelector('button.next');
+      this.ctrlNext.setAttribute('aria-label', 'Next');
 
-  		// progress bar
-  		this.progress = this.formElement.querySelector('div.progress');
-  		// set progressbar attributes
-  		this.progress.setAttribute('role', 'progressbar');
-  		this.progress.setAttribute('aria-readonly', 'true');
-  		this.progress.setAttribute('aria-valuemin', '0');
-  		this.progress.setAttribute('aria-valuemax', '100');
-  		this.progress.setAttribute('aria-valuenow', '0');
+      // progress bar
+      this.progress = this.formElement.querySelector('div.progress');
+      // set progressbar attributes
+      this.progress.setAttribute('role', 'progressbar');
+      this.progress.setAttribute('aria-readonly', 'true');
+      this.progress.setAttribute('aria-valuemin', '0');
+      this.progress.setAttribute('aria-valuemax', '100');
+      this.progress.setAttribute('aria-valuenow', '0');
 
-  		// question number status
-  		this.questionStatus = this.formElement.querySelector('span.number');
-  		// give the questions status an id
-  		this.questionStatus.id = this.questionStatus.id || randomID();
-  		// associate "x / y" with the input via aria-describedby
-  		for (let i = this.questions.length - 1; i >= 0; i--) {
-  			const formElement = this.questions[i].querySelector('input, textarea, select');
-  			formElement.setAttribute('aria-describedby', this.questionStatus.id);
-  		};
-  		// current question placeholder
-  		this.currentNum = this.questionStatus.querySelector('span.number-current');
-  		this.currentNum.innerHTML = Number(this.current + 1);
-  		// total questions placeholder
-  		this.totalQuestionNum = this.questionStatus.querySelector('span.number-total');
-  		this.totalQuestionNum.innerHTML = this.questionsCount;
+      // question number status
+      this.questionStatus = this.formElement.querySelector('span.number');
+      // give the questions status an id
+      this.questionStatus.id = this.questionStatus.id || randomID();
+      // associate "x / y" with the input via aria-describedby
+      for (let i = this.questions.length - 1; i >= 0; i--) {
+        const formElement = this.questions[i].querySelector('input, textarea, select');
+        formElement.setAttribute('aria-describedby', this.questionStatus.id);
+      };
+      // current question placeholder
+      this.currentNum = this.questionStatus.querySelector('span.number-current');
+      this.currentNum.innerHTML = Number(this.current + 1);
+      // total questions placeholder
+      this.totalQuestionNum = this.questionStatus.querySelector('span.number-total');
+      this.totalQuestionNum.innerHTML = this.questionsCount;
 
-  		// error message
-  		this.error = this.formElement.querySelector('span.error-message');
+      // error message
+      this.error = this.formElement.querySelector('span.error-message');
 
-  		// checks for HTML5 Form Validation support
-  		// a cleaner solution might be to add form validation to the custom Modernizr script
-  		this.supportsHTML5Forms = typeof document.createElement('input').checkValidity === 'function';
+      // checks for HTML5 Form Validation support
+      // a cleaner solution might be to add form validation to the custom Modernizr script
+      this.supportsHTML5Forms = typeof document.createElement('input').checkValidity === 'function';
 
       /***** initEvents *****/
       const self = this;
-			// first input
+      // first input
       const firstElInput = this.questions[this.current].querySelector('input, textarea, select');
-			// focus
+      // focus
       const onFocusStartFn = function() {
         firstElInput.removeEventListener('focus', onFocusStartFn);
         addClass(self.ctrlNext, 'show');
       };
 
-  		// show the next question control first time the input gets focused
-  		firstElInput.addEventListener('focus', onFocusStartFn);
+      // show the next question control first time the input gets focused
+      firstElInput.addEventListener('focus', onFocusStartFn);
 
-  		// show next question
-  		this.ctrlNext.addEventListener('click', (ev) => {
-  			ev.preventDefault();
-  			this.nextQuestion();
-  		});
+      // show next question
+      this.ctrlNext.addEventListener('click', (ev) => {
+        ev.preventDefault();
+        this.nextQuestion();
+      });
 
-  		// pressing enter will jump to next question
-  		this.formElement.addEventListener('keydown', (ev) => {
-  			const keyCode = ev.keyCode || ev.which;
-  			// enter
-  			if(keyCode === 13) {
-  				ev.preventDefault();
-  				this.nextQuestion();
-  			}
-  		});
+      // pressing enter will jump to next question
+      this.formElement.addEventListener('keydown', (ev) => {
+        const keyCode = ev.keyCode || ev.which;
+        // enter
+        if(keyCode === 13) {
+          ev.preventDefault();
+          this.nextQuestion();
+        }
+      });
     }
     showError(err) {
-  		let message = '';
+      let message = '';
       switch (err) {
         case 'EMPTYSTR':
           message = 'Please fill the field before continuing';
           break;
         case 'INVALIDEMAIL':
-  				message = 'Please fill a valid email address';
-  				break;
+          message = 'Please fill a valid email address';
+          break;
         case 'MISMATCH':
           message = 'Please fill in a correct value';
           this.questions[this.current].querySelector('input, textarea, select').value = '';
           break;
-  			// ...
-  			default :
-  				message = err;
-  		};
-  		this.error.innerHTML = message;
-  		addClass(this.error, 'show');
-  	}
+        // ...
+        default :
+          message = err;
+      };
+      this.error.innerHTML = message;
+      addClass(this.error, 'show');
+    }
     clearError() {
       removeClass(this.error, 'show');
     }
     updateProgress() {
       const currentProgress = this.current * (100 / this.questionsCount);
-  		this.progress.style.width = currentProgress + '%';
-  		// update the progressbar's aria-valuenow attribute
-  		this.progress.setAttribute('aria-valuenow', currentProgress);
+      this.progress.style.width = currentProgress + '%';
+      // update the progressbar's aria-valuenow attribute
+      this.progress.setAttribute('aria-valuenow', currentProgress);
     }
     updateQuestionNumber() {
-  		// first, create next question number placeholder
-  		this.nextQuestionNum = document.createElement('span');
-  		this.nextQuestionNum.className = 'number-next';
-  		this.nextQuestionNum.innerHTML = Number(this.current + 1);
-  		// insert it in the DOM
-  		this.questionStatus.appendChild(this.nextQuestionNum);
-  	}
+      // first, create next question number placeholder
+      this.nextQuestionNum = document.createElement('span');
+      this.nextQuestionNum.className = 'number-next';
+      this.nextQuestionNum.innerHTML = Number(this.current + 1);
+      // insert it in the DOM
+      this.questionStatus.appendChild(this.nextQuestionNum);
+    }
     submit() {
-  		this.options.onSubmit(this.formElement);
-  	}
+      this.options.onSubmit(this.formElement);
+    }
     validate() {
-  		// current question´s input
-  		const input = this.questions[this.current].querySelector('input, textarea, select');
+      // current question´s input
+      const input = this.questions[this.current].querySelector('input, textarea, select');
       if (input.hasAttribute('required')) {
-    		if (input.value === '') {
-    			this.showError('EMPTYSTR');
-    			return false;
-    		}
+        if (input.value === '') {
+          this.showError('EMPTYSTR');
+          return false;
+        }
         if (input.hasAttribute('pattern')) {
           const pattern = input.getAttribute('pattern');
           const patternTest = (new RegExp(pattern)).test(input.value.trim());
@@ -170,8 +170,8 @@
         }
       }
 
-  		return true;
-  	}
+      return true;
+    }
     nextQuestion() {
       if (!this.validate()) {
         return false;
@@ -180,10 +180,10 @@
       const input = this.questions[this.current].querySelector('input, textarea, select');
       // checks HTML5 validation
       if (this.supportsHTML5Forms) {
-  			// clear any previous error messages
-  			input.setCustomValidity('');
+        // clear any previous error messages
+        input.setCustomValidity('');
 
-  			// checks input against the validation constraint
+        // checks input against the validation constraint
         if (!input.checkValidity()) {
           // Optionally, set a custom HTML5 valiation message
           // comment or remove this line to use the browser default message
@@ -193,46 +193,46 @@
           // prevent the question from changing
           return false;
         }
-  		}
+      }
 
       if (input.hasAttribute('escape') && this.options.onEscape) {
         const cont = this.options.onEscape(input, this.formElement);
         if (!cont) { return; }
       }
 
-  		// check if form is filled
-  		if (this.current === this.questionsCount - 1) {
-  			this.isFilled = true;
-  		}
+      // check if form is filled
+      if (this.current === this.questionsCount - 1) {
+        this.isFilled = true;
+      }
 
-  		// clear any previous error messages
-  		this.clearError();
+      // clear any previous error messages
+      this.clearError();
 
-  		// current question
-  		const currentQuestion = this.questions[this.current];
+      // current question
+      const currentQuestion = this.questions[this.current];
 
-  		// increment current question iterator
-  		++this.current;
+      // increment current question iterator
+      ++this.current;
 
-  		// update progress bar
-  		this.updateProgress();
+      // update progress bar
+      this.updateProgress();
       let nextQuestion;
-  		if (!this.isFilled) {
-  			// change the current question number/status
-  			this.updateQuestionNumber();
+      if (!this.isFilled) {
+        // change the current question number/status
+        this.updateQuestionNumber();
 
-  			// add class "show-next" to form element (start animations)
-  			addClass(this.formElement, 'show-next');
+        // add class "show-next" to form element (start animations)
+        addClass(this.formElement, 'show-next');
 
-  			// remove class "current" from current question and add it to the next one
-  			// current question
-  			nextQuestion = this.questions[this.current];
-  			removeClass(currentQuestion, 'current');
-  			addClass(nextQuestion, 'current');
-  		}
+        // remove class "current" from current question and add it to the next one
+        // current question
+        nextQuestion = this.questions[this.current];
+        removeClass(currentQuestion, 'current');
+        addClass(nextQuestion, 'current');
+      }
 
-  		// after animation ends, remove class "show-next" from form element and change current question placeholder
-  		const self = this;
+      // after animation ends, remove class "show-next" from form element and change current question placeholder
+      const self = this;
       const onEndTransitionFn = function () {
         if (true/*support.transitions*/) {
           this.removeEventListener('transitionend', onEndTransitionFn);
@@ -243,16 +243,16 @@
           removeClass(self.formElement, 'show-next');
           self.currentNum.innerHTML = self.nextQuestionNum.innerHTML;
           self.questionStatus.removeChild(self.nextQuestionNum);
-					// force the focus on the next input
+          // force the focus on the next input
           nextQuestion.querySelector('input, textarea, select').focus();
         }
       };
 
-  		if (true/*support.transitions*/) {
-  			this.progress.addEventListener('transitionend', onEndTransitionFn);
-  		} else {
-  			onEndTransitionFn();
-  		}
+      if (true/*support.transitions*/) {
+        this.progress.addEventListener('transitionend', onEndTransitionFn);
+      } else {
+        onEndTransitionFn();
+      }
     }
     setSubmitted() {
       addClass(this.formElement.querySelector('.form-carousel-inner'), 'hide');
