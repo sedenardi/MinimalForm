@@ -114,13 +114,17 @@
     }
     showError(err) {
   		let message = '';
-  		switch (err) {
-  			case 'EMPTYSTR' :
-  				message = 'Please fill the field before continuing';
-  				break;
-  			case 'INVALIDEMAIL' :
+      switch (err) {
+        case 'EMPTYSTR':
+          message = 'Please fill the field before continuing';
+          break;
+        case 'INVALIDEMAIL':
   				message = 'Please fill a valid email address';
   				break;
+        case 'MISMATCH':
+          message = 'Please fill in a correct value';
+          this.questions[this.current].querySelector('input, textarea, select').value = '';
+          break;
   			// ...
   			default :
   				message = err;
@@ -150,34 +154,44 @@
   	}
     validate() {
   		// current question´s input
-  		const input = this.questions[this.current].querySelector('input, textarea, select').value;
-  		if (input === '') {
-  			this.showError('EMPTYSTR');
-  			return false;
-  		}
+  		const input = this.questions[this.current].querySelector('input, textarea, select');
+      if (input.hasAttribute('required')) {
+    		if (input.value === '') {
+    			this.showError('EMPTYSTR');
+    			return false;
+    		}
+        if (input.hasAttribute('pattern')) {
+          const pattern = input.getAttribute('pattern');
+          const patternTest = (new RegExp(pattern)).test(input.value.trim());
+          if (!patternTest) {
+            this.showError('MISMATCH');
+            return false;
+          }
+        }
+      }
 
   		return true;
   	}
     nextQuestion() {
       if (!this.validate()) {
-  			return false;
-  		}
+        return false;
+      }
       // checks HTML5 validation
-  		if (this.supportsHTML5Forms) {
+      if (this.supportsHTML5Forms) {
   			const input = this.questions[this.current].querySelector('input, textarea, select');
   			// clear any previous error messages
   			input.setCustomValidity('');
 
   			// checks input against the validation constraint
-  			if (!input.checkValidity()) {
-  				// Optionally, set a custom HTML5 valiation message
-  				// comment or remove this line to use the browser default message
-  				input.setCustomValidity('Whoops, that\'s not an email address!');
-  				// display the HTML5 error message
-  				this.showError(input.validationMessage);
-  				// prevent the question from changing
-  				return false;
-  			}
+        if (!input.checkValidity()) {
+          // Optionally, set a custom HTML5 valiation message
+          // comment or remove this line to use the browser default message
+          input.setCustomValidity('Whoops, that\'s not an email address!');
+          // display the HTML5 error message
+          this.showError(input.validationMessage);
+          // prevent the question from changing
+          return false;
+        }
   		}
 
   		// check if form is filled
